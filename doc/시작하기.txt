@@ -1,0 +1,93 @@
+<!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+또는:
+
+<!-- 상용버전, 속도와 용량이 최적화됨. -->
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+# 선언적 렌더링
+    Vue.js 핵심 DOM에서 데이터 선언적 렌더링 할 수 있다.
+
+    데이터와 DOM이 연결됐고 모든 것이 반응형이 됐다.
+    HTML 직접 상호작용할 필요 없이 Vue가 DOM을 제어한다.
+
+    <div id="app-2">
+        <span v-bind:title="message">
+            내 위에 잠시 마우스를 올리면 동적으로 바인딩 된 title을 볼 수 있다.
+        </span>
+    </div>
+    var app2 = new Vue({
+    el: '#app-2',
+    data:{
+        message: `이 페이지는 ${new Date()}에 로드되었습니다.`
+        }
+    })
+
+    v-bind:title="message" v-bind 속성 디렉티브 라고 한다.
+    v- 접두어? 렌더링 DOM에 특수한 반응형 동작함
+    "이 요소의 title 속성을 Vue 인스턴스틔 message 속성으로 최신 상태를 유지한다"
+
+
+    <!-- 엘리먼트 표시 여부 -->
+    <div id="app-3">
+        <p v-if="seen">이제 나를 볼 수 있어요</p>
+    </div>
+
+    var app3 = new Vue({
+        el: '#app-3',
+        data:{
+            seen: true
+            }
+    })
+
+    v-if=""에 넘기는 data값을 정할 수 있다. seen에 true를 썼더니?
+    보이고, false를 썼더니 안보인다.
+    텍스트 속성 뿐 아니라 DOM의 구조에도 데이터를 바인딩 할 수 있음을 보여준다.
+    Vue가 트랜지션 효과 적용할 수 있도록 전환 효과 시스템도 제공해준다.
+
+    <div id="app-4">
+        <ol>            
+            <li v-for="todo in todos">
+                {{todo.text}}
+            </li>
+        </ol>
+    </div>
+
+    var app4 = new Vue({
+    el: '#app-4',
+    data:{
+        todos:[
+            {text: 'Javascript배우기'},
+            {text: 'Vue 배우기'},
+            {text: '무언가 멋진 거 만들기'}
+        ]
+    }
+    })
+
+    동적으로 추가되네! 새로고침 안해도 데이터 넘어오면 그냥 추가해줌.
+    내용 바뀌면 넣어준다. 동적으로. 리액트는 setState()로 그걸 감지했는데
+    Vue는? new Vue안에 data변경이 있을 때 그걸 감지해주는 걸까?
+
+    <div id="app-5">
+        <p>{{message}}</p>
+        <button v-on:click="reverseMessage">메시지 뒤집기</button>
+    </div>
+
+    var app5 = new Vue({
+    el: '#app-5',
+    data:{
+        message: '안녕하세요 케케',
+    },
+    methods: {
+        reverseMessage: function(){
+            this.message = this.message.split('').reverse().join('')
+        }
+    }
+    })
+
+    이 방법은 직접적으로 DOM을 건드리지 않고 앱의 상태만은 업데이트 한다.
+    그러면 DOM업데이트는 Vue가 알아서 해준다. 화면은 알아서 바꿔줌.
+    v-on:click="메서드 명"
+    el, data, methods:{
+        "메서드명" : function(){로직 수행}
+    }
