@@ -1,0 +1,24 @@
+@@@설치방법
+
+# Vue는 ECMAScript 5 기능 사용(모든 ECMAScript 5 호환 브라우저 지원), IE8 이하 버전은 지원x
+
+# 크롬 확장 프로그램 Vue Devtools 사용
+
+
+- 직접 <script> 추가
+    다운받아서 script태그에 추가. Vue 전역 변수 등록
+
+    개발버전과 프로덕션 버전 있음. 프로덕션은 오류 메시지가 안 뜬데!
+    !개발 중에는 프로덕션 버전을 사용하지 마십시오. 경고 및 일반적인 실수를 놓칠 수 있습니다!
+
+- 프로토 타이핑또는 학습 목적이라면, 아래 코드로 최신 버전을 사용할 수 있습니다.
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+- NPM
+    대규모 애플리케이션 구축할 땐 NPM 사용
+    # 최신 안정화 버전
+    $ npm install vue
+
+- CLI
+    공식 CLI 제공
+

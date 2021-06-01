@@ -1,0 +1,48 @@
+@@@각 다른 비들간 차이점
+NPM 패키지의 dist/ 디렉토리에는 Vue.js의 다양한 빌드가 있다.
+
+
+                            UMD     	CommonJS	            ES Module (for bundlers)	    ES Module (for browsers)
+    Full	                vue.js     	vue.common.js	        vue.esm.js	                    vue.esm.browser.js
+    Runtime-only	vue.runtime.js	    vue.runtime.common.js	vue.runtime.esm.js	                    -
+    Full            	vue.min.js	        -	                        -	                    vue.esm.browser.min.js
+    (production)
+    Runtime-only	vue.runtime.min.js	    -	                        -	                            -
+    (production)
+
+
+
+    Full: 컴파일러 및 런타임 버전을 모두 포함합니다.
+
+    Compiler: 템플릿 문자열을 JavaScript 렌더링 함수로 컴파일하는 코드입니다.
+
+    Runtime: Vue 인스턴스 생성, 가상 DOM 렌더링 및 업데이트 등을 담당하는 코드. 기본적으로 모든 컴파일러를 제외한 것입니다.
+
+    UMD: UMD 빌드는 <script>태그를 통해 브라우저에서 직접 사용할 수 있습니다. https://unpkg.com/vue의 Unpkg CDN의 기본 파일은 Runtime + Compiler UMD 빌드 (vue.js)입니다.
+
+    CommonJS: CommonJS 빌드는 browserify 또는 webpack 1와 같은 이전 번들과 함께 사용하기 위한 것입니다. 이러한 번들(pkg.main)의 기본 파일은 런타임 전용 CommonJS 빌드(vue.runtime.common.js)입니다.
+
+    ES Module: ES 모듈 빌드는 webpack 2 또는 rollup과 같은 최신 번들과 함께 사용하기 위한 것입니다. 이러한 번들(pkg.module)의 기본 파일은 런타임 전용 ES 모듈 빌드(vue.runtime.esm.js)입니다.
+
+    번들러용 ESM: webpack 2 또는 Rollup과 같은 최신 번들러와 함께 사용하도록 설계되었습니다. ESM 형식은 정적으로 구문 분석이 가능하도록 설계되었으므로 번들러을 활용하여 트리 쉐이킹을 실행하여 사용하지 않는 코드를 최종 패키지에서 제거할 수 있습니다. 이러한 번들러의 제공되는 기본 파일(pkg.module)은 ES 모듈 빌드의 런타임(vue.runtime.esm.js) 전용입니다.
+
+    브라우저 ESM (2.6+ 만 해당): 최신 브라우저에서는 <script type="module">를 이용하여 직접 가져올 수 있습니다.
+
+# 런타임 + 컴파일러와 런타임의 차이점
+    템플릿 실시간 컴파일 할 때 컴파일러와 전체 빌드가 필요
+
+    //아래 내용은 컴파일러 필요
+    new Vue({
+        template: '<div>({hi})</div>'
+    })
+    //아래는 필요하지 않음
+    new Vue({
+        render (h) {
+            return h('div', this.hi)
+        }
+    })
+
+    vue-loader 또는 vueify -> *.vue 파일의 템플릿은 빌드시 Javascript로 미리 컴파일 된다.
+    최종 번들에는 실제 컴파일러 필요치 않으므로 런타임 전용빌드 사용 가능
+    런타임 전용 빌드는 30%정도 가벼움. 하지만 전체 빌드 사용하려면 번들러에서 별칭을 구성해야 함
+    
