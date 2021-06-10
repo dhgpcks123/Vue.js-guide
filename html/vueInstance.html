@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
+    <script type="text/javascript" src="/javascript/vueInstnace.js" defer></script>
+</head>
+    <h2>Vue인스턴스 만들기</h2>
+    <pre>
+        모든 Vue앱은 새 Vue 인스턴스에서 시작!
+        관례 : Vue 인스턴스 참조하기 위해 종종 변수 mv(ViewModel의 약자)을 사용
+        
+        그리고 options 객체를 전달해줘야 함!
+
+        컴포넌트 트리로 구성 가능
+        Root Instance
+        -TodoList
+            -TodoItem
+                -DeleteTodoButton
+                -EditTodoButton
+            -TodoListFooter
+                -ClearTodoButton
+                -TodoListStatistics
+    </pre>
+    <h2>데이터와 메소드</h2>
+    <pre>
+        Vue인스턴스가 생성될 때 data 객체에 있는 모든 속성이 Vue의
+        반응형 시스템에 추가된다. 그리고 속성 값 바뀌면 "반응"하여 업데이트 함
+        
+    </pre>
+    <div id="app">
+        <app-nav></app-nav>
+        <app-view>
+            <app-sidebar></app-sidebar>
+        </app-view>
+    </div>
+</body>
+</html>
