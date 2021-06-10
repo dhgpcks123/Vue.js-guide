@@ -1,0 +1,11 @@
+-Vue인스턴스
+너프하게 보면
+
+생성        (create)
+DOM부착     (mount)
+업데이트    (update)
+파괴        (destory)
+
+이 과정에서 훅Hook을 할 수 있도록 API 제공
+
+beforeCreate, created, beforeMount, mounted, beforeUpdate, updated, beforeDestory, destroyed
